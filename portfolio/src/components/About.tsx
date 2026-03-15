@@ -43,8 +43,8 @@ export default function About() {
             Jaskaran Singh Basra
           </h2>
           <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
-            I'm a visual artist and developer passionate about creating immersive digital experiences. 
-            Let's connect and build something extraordinary together.
+            I&apos;m a visual artist and developer passionate about creating immersive digital experiences. 
+            Let&apos;s connect and build something extraordinary together.
           </p>
         </motion.div>
 

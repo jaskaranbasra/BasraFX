@@ -32,9 +32,9 @@ const CATEGORIES = [
 export default function Projects() {
   const [activeTab, setActiveTab] = useState(CATEGORIES[0].id);
   const [activeSubTab, setActiveSubTab] = useState(CATEGORIES[0].subcategories![0].id);
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<Record<string, unknown>[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<any | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Record<string, unknown> | null>(null);
 
   // Close modal on escape key
   useEffect(() => {
@@ -149,7 +149,7 @@ export default function Projects() {
           <AnimatePresence mode="popLayout">
             {!loading && items.map((project, index) => (
               <motion.div
-                key={project.id}
+                key={project.id as React.Key}
                 onClick={() => setSelectedProject(project)}
                 layout
                 initial={{ opacity: 0, scale: 0.95, y: 30 }}
@@ -161,7 +161,7 @@ export default function Projects() {
                 {/* Dynamically render video or image */}
                 {project.type === 'video' ? (
                   <video 
-                    src={project.src}
+                    src={project.src as string}
                     autoPlay
                     muted
                     loop
@@ -171,7 +171,7 @@ export default function Projects() {
                 ) : (
                   <div 
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                    style={{ backgroundImage: `url('${project.src}')` }}
+                    style={{ backgroundImage: `url('${project.src as string}')` }}
                   />
                 )}
                 
@@ -182,7 +182,7 @@ export default function Projects() {
                   {/* Top Bar inside card */}
                   <div className="flex justify-between items-start">
                     <span className="text-xs font-mono tracking-widest text-white/80 uppercase backdrop-blur-md bg-black/40 border border-white/10 px-4 py-1.5 rounded-full">
-                      {project.category}
+                      {project.category as string}
                     </span>
                     <div className="w-12 h-12 rounded-full bg-black/40 border border-white/10 backdrop-blur-md flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300 shadow-2xl">
                       <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
@@ -192,7 +192,7 @@ export default function Projects() {
                   {/* Title & Info */}
                   <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <h3 className="text-3xl font-semibold tracking-tight text-white mb-2 truncate">
-                      {project.title}
+                      {project.title as string}
                     </h3>
                   </div>
                 </div>
@@ -204,7 +204,7 @@ export default function Projects() {
                 animate={{ opacity: 1 }}
                 className="col-span-full py-20 text-center text-white/50 border border-white/5 rounded-3xl"
               >
-                No projects found in this category. Let's add some!
+                No projects found in this category. Let&apos;s add some!
               </motion.div>
             )}
           </AnimatePresence>
@@ -238,15 +238,15 @@ export default function Projects() {
               
               {selectedProject.type === 'video' ? (
                 <video 
-                  src={selectedProject.src}
+                  src={selectedProject.src as string}
                   autoPlay
                   controls
                   className="max-w-[95vw] max-h-[85vh] object-contain rounded-lg shadow-2xl ring-1 ring-white/10"
                 />
               ) : (
                 <img 
-                  src={selectedProject.src}
-                  alt={selectedProject.title}
+                  src={selectedProject.src as string}
+                  alt={selectedProject.title as string}
                   className="max-w-[95vw] max-h-[85vh] object-contain rounded-lg shadow-2xl ring-1 ring-white/10"
                 />
               )}
