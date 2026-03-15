@@ -37,7 +37,10 @@ export default function Overlay() {
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white">
             BFX
           </h1>
-          <p className="mt-4 text-xl md:text-2xl text-white/70 font-light tracking-wide">
+          <p className="mt-2 text-sm text-white/50 font-medium font-mono">
+            Loading Experience...
+          </p>
+          <p className="mt-2 text-xl md:text-2xl text-white/70 font-light tracking-wide">
             Engineering Visual Excellence
           </p>
         </motion.div>

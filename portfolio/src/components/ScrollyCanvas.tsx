@@ -110,6 +110,18 @@ export default function ScrollyCanvas() {
     return () => window.removeEventListener('resize', handleResize);
   }, [isLoaded, frameIndex]);
 
+  // Lock body scroll while loading
+  useEffect(() => {
+    if (!isLoaded) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isLoaded]);
+
   return (
     <div ref={containerRef} className="relative h-[500vh] w-full">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#121212]">
