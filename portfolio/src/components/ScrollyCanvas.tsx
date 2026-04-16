@@ -24,13 +24,16 @@ export default function ScrollyCanvas() {
         const paddedIndex = i.toString().padStart(PADDED_NUMBER_LENGTH, "0");
         img.src = `${PUBLIC_DIR_PREFIX}${paddedIndex}${DELAY_SUFFIX}`;
         
-        img.onload = () => {
+        const handleLoad = () => {
             loadedCount++;
             if (loadedCount === TOTAL_FRAMES) {
                 setImagesRef(images);
                 setIsLoaded(true);
             }
         };
+
+        img.onload = handleLoad;
+        img.onerror = handleLoad;
         images.push(img);
     }
   }, []);
@@ -110,26 +113,9 @@ export default function ScrollyCanvas() {
     return () => window.removeEventListener('resize', handleResize);
   }, [isLoaded, frameIndex]);
 
-  // Lock body scroll while loading
-  useEffect(() => {
-    if (!isLoaded) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isLoaded]);
-
   return (
     <div ref={containerRef} className="relative h-[500vh] w-full">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#121212]">
-        {!isLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center text-white/50">
-                Loading Experience...
-            </div>
-        )}
         <canvas
           ref={canvasRef}
           className="absolute inset-0 z-0 h-full w-full object-cover"
