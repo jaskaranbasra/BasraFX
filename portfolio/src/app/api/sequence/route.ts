@@ -40,10 +40,10 @@ export async function GET() {
     const files = data.files || [];
     
     // Sort files by name so they play in the correct order
-    files.sort((a: any, b: any) => a.name.localeCompare(b.name));
+    files.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
 
     // Use robust proxy endpoint to prevent 403 rate-limits from Google APIs
-    const urls = files.map((f: any) => `/api/media?id=${f.id}`);
+    const urls = files.map((f: { id: string }) => `/api/media?id=${f.id}`);
 
     return NextResponse.json({ urls });
   } catch (error) {

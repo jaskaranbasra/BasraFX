@@ -32,7 +32,7 @@ async function listFilesInFolder(folderId: string, category: string) {
   }
   const data = await res.json();
   
-  return (data.files || []).map((file: any) => {
+  return (data.files || []).map((file: { id: string; name: string; mimeType: string }) => {
     const isVideo = file.mimeType.startsWith('video/');
     return {
       id: file.id,
