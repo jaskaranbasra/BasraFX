@@ -99,6 +99,7 @@ export default function ScrollyCanvas() {
     if (isLoaded) {
       renderFrame(0);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded]);
 
   // Handle Resize
@@ -111,6 +112,7 @@ export default function ScrollyCanvas() {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded, frameIndex]);
 
   return (

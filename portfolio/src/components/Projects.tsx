@@ -244,6 +244,7 @@ export default function Projects() {
                   className="max-w-[95vw] max-h-[85vh] object-contain rounded-lg shadow-2xl ring-1 ring-white/10"
                 />
               ) : (
+                /* eslint-disable-next-line @next/next/no-img-element */
                 <img 
                   src={selectedProject.src as string}
                   alt={selectedProject.title as string}
